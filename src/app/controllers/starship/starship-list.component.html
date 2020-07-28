@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">
+    <app-header
+      [title]="'Starships'"
+      [sortOptions]="sortOptions"
+      (sortChange)="onSortChange($event)"
+    ></app-header>
+  </div>
+  <div class="card-body p-0">
+    <div *ngIf="starships$ | async as starshipResponse">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Cargo_capacity</th>
+            <th scope="col">Date created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let starship of starshipResponse.results | sortBy: sortSelection
+            "
+          >
+            <td>{{ starship.name }}</td>
+            <td>{{ starship.manufacturer }}</td>
+            <td>{{ starship.cargo_capacity }}</td>
+            <td>{{ starship.created | date: "short" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

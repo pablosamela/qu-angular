@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col">
+    <h3>{{ title }}</h3>
+  </div>
+  <div class="col text-right">
+    <form [formGroup]="sortForm">
+      <select
+        formControlName="sortOption"
+        (change)="toggleSort()"
+        class="custom-select custom-select-sm"
+      >
+        <option hidden selected>Sort By</option>
+        <option
+          *ngFor="let eachSort of sortOptions"
+          [value]="eachSort.value | json"
+          >{{ eachSort.label }}</option
+        >
+      </select>
+    </form>
+  </div>
+</div>

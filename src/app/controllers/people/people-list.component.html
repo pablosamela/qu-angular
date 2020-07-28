@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">
+    <app-header
+      [title]="'People'"
+      [sortOptions]="sortOptions"
+      (sortChange)="onSortChange($event)"
+    ></app-header>
+  </div>
+  <div class="card-body p-0">
+    <div *ngIf="people$ | async as peopleResponse">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Height</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Date created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let people of peopleResponse.results | sortBy: sortSelection">
+            <td>{{ people.name }}</td>
+            <td>{{ people.height }}</td>
+            <td>{{ people.gender }}</td>
+            <td>{{ people.created | date: "short" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
